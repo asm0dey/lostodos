@@ -1,0 +1,14 @@
+{
+  "name": "lostodos",
+  "version": "1.0.0",
+  "main": "src/main/webapp/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "asm0dey",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.3.12",
+    "gulp": "^3.8.11"
+  }
+}

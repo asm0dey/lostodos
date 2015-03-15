@@ -1,0 +1,24 @@
+{
+  "name": "lostodos",
+  "version": "0.0.1",
+  "authors": [
+    "p.finkelshteyn <p.finkelshteyn@voskhod.ru>"
+  ],
+  "main": "index.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "master",
+    "jquery": "~2.1.3"
+  }
+}

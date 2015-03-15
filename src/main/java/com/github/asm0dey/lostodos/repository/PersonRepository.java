@@ -7,5 +7,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * Created by finkel on 15.03.15.
  */
-public interface HumanUserRepository extends PagingAndSortingRepository<Person, Long>, QueryDslPredicateExecutor<Person> {
+public interface PersonRepository extends PagingAndSortingRepository<Person, Long>, QueryDslPredicateExecutor<Person> {
 }

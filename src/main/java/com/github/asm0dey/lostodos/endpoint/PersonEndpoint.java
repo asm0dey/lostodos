@@ -1,44 +1,46 @@
 package com.github.asm0dey.lostodos.endpoint;
 
+import com.github.asm0dey.lostodos.dao.PersonDao;
 import com.github.asm0dey.lostodos.entity.Person;
 import com.github.asm0dey.lostodos.entity.QTag;
 import com.github.asm0dey.lostodos.entity.Tag;
-import com.github.asm0dey.lostodos.repository.HumanUserRepository;
+import com.github.asm0dey.lostodos.repository.PersonRepository;
 import com.github.asm0dey.lostodos.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.QPageRequest;
-import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
-import javax.ws.rs.*;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.QueryParam;
 
 /**
  * Created by finkel on 15.03.15.
  */
-@Component
-@Path("/user")
-public class HumanUserEndpoint {
+@RestController
+@RequestMapping("/rest/user")
+public class PersonEndpoint {
 
-    @Autowired
-    private HumanUserRepository userRepository;
+
     @Autowired
     private TagRepository tagRepository;
 
-    @POST
-    public Person createUser(@Valid Person person) {
-        return userRepository.save(person);
+    @Autowired
+    private PersonRepository personRepository;
+
+    @Autowired
+    private PersonDao personDao;
+
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    public Person createUser(@Valid @RequestBody Person person) {
+        return personRepository.save(person);
     }
 
-    @GET
-    @Produces("text/plain")
-    public String hello() {
-        return "Hi!";
-    }
-
-    @GET
-    @Path("{id}/tag")
     public Page<Tag> findTags(@PathParam("id") Long userId,
                               @QueryParam("page") @DefaultValue("0") Integer page,
                               @QueryParam("limit") @DefaultValue("10") Integer limit,

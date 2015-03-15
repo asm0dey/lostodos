@@ -1,7 +1,10 @@
 package com.github.asm0dey.lostodos.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +17,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"owner_id", "name"}, name = "userTag"))
+@DynamicInsert
+@DynamicUpdate
 public class Tag implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +31,11 @@ public class Tag implements Serializable {
     private String color;
 
     @ManyToOne(optional = false)
+    @JsonBackReference("user_tags")
     private HumanUser owner;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonBackReference("task_tags")
     private Set<TaskHierarchyItem> tasks;
 
 }

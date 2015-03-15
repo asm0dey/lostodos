@@ -19,6 +19,6 @@
   ],
   "dependencies": {
     "angular-material": "master",
-    "jquery": "~2.1.3"
+    "angular-ui-router": "~0.2.13"
   }
 }

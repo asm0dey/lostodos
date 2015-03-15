@@ -1,8 +1,10 @@
 package com.github.asm0dey.lostodos.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,9 +17,11 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@DynamicInsert
+@DynamicUpdate
 public class TodoGroup extends TaskHierarchyItem {
     @OneToMany(mappedBy = "parent")
+    @JsonManagedReference("task_children")
     private Set<TaskHierarchyItem> children;
 
     @Column

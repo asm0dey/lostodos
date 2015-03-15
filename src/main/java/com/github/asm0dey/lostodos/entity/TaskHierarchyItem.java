@@ -32,7 +32,7 @@ public abstract class TaskHierarchyItem {
 
     @ManyToOne(optional = false)
     @JsonBackReference("user_tasks")
-    private HumanUser owner;
+    private Person owner;
 
     @ManyToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
     @JsonManagedReference("task_tags")

@@ -32,7 +32,7 @@ public class Tag implements Serializable {
 
     @ManyToOne(optional = false)
     @JsonBackReference("user_tags")
-    private HumanUser owner;
+    private Person owner;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonBackReference("task_tags")

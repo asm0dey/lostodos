@@ -2,12 +2,16 @@
     <md-content class="md-padding">
         <form name="loginForm">
             <div layout="column">
+                <md-radio-group ng-model="login.loginType" layout="row">
+                    <md-radio-button ng-value="'login'" aria-label="Log in">Log in</md-radio-button>
+                    <md-radio-button ng-value="'signup'" aria-label="Sign up">Sign up</md-radio-button>
+                </md-radio-group>
                 <md-input-container flex>
                     <label>Email</label>
                     <input type="email" ng-model="login.email">
                 </md-input-container>
-                <md-input-container flex>
-                    <label>Login</label>
+                <md-input-container flex ng-if="login.loginType == 'signup'">
+                    <label>Username</label>
                     <input type="text" ng-model="login.username">
                 </md-input-container>
                 <md-input-container flex>

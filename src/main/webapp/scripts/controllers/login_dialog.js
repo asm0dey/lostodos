@@ -1,16 +1,23 @@
-app.controller('LoginCtrl', function ($http, $mdDialog) {
-    this.loginType = 'login';
-    this.createUser = function (login) {
+app.controller('LoginCtrl', function ($http, $mdDialog, authService, $scope) {
+    $scope.loginType = 'login';
+    $scope.login = {};
+    $scope.createUser = function () {
         $http
-            .post('rest/user', JSON.stringify(login))
+            .post('api/register', JSON.stringify($scope.login))
             .success(function (data) {
-                $mdDialog.hide()
-            })
-    }
-    this.signIn = function(user){
-        $http.post('rest/user/login',JSON.stringify(user))
+                signIn();
+            });
+    };
+    $scope.signIn = function () {
+        var data = 'j_username=' + encodeURIComponent($scope.login.username) + '&j_password=' + encodeURIComponent($scope.login.password) + '&_spring_security_remember_me='+$scope.login.rememberMe+'&submit=Login'
+        $http.post('api/authentication', data, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
             .success(function (data) {
+                authService.loginConfirmed();
                 $mdDialog.hide();
             })
-    }
+    };
 });

@@ -6,11 +6,11 @@
                     <md-radio-button ng-value="'login'" aria-label="Log in">Log in</md-radio-button>
                     <md-radio-button ng-value="'signup'" aria-label="Sign up">Sign up</md-radio-button>
                 </md-radio-group>
-                <md-input-container flex>
+                <md-input-container flex ng-if="loginType == 'signup'">
                     <label>Email</label>
                     <input type="email" ng-model="login.email">
                 </md-input-container>
-                <md-input-container flex ng-if="loginType == 'signup'">
+                <md-input-container flex >
                     <label>Username</label>
                     <input type="text" ng-model="login.username">
                 </md-input-container>
@@ -18,10 +18,13 @@
                     <label>Password</label>
                     <input type="password" ng-model="login.password">
                 </md-input-container>
+                <md-checkbox ng-model="login.rememberMe" aria-label="Remember me">
+                    Remember me
+                </md-checkbox>
             </div>
         </form>
     </md-content>
     <div class="md-actions">
-        <md-button class="md-raised md-primary" ng-click="(loginType == 'signup')?login.createUser({username:login.username,email:login.email,password:login.password}):login.signIn({username:login.email,password:login.password})" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
+        <md-button class="md-raised md-primary" ng-click="(loginType == 'signup')?createUser():signIn()" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
     </div>
 </md-dialog>

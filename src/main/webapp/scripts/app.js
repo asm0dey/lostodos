@@ -1,1 +1,1 @@
-var app = angular.module('LosTodos', ['ngMaterial']);
+var app = angular.module('LosTodos', ['ngMaterial','http-auth-interceptor']);

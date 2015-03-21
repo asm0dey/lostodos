@@ -18,7 +18,8 @@ import java.util.Set;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"owner_id", "name"}, name = "userTag"))
 @DynamicInsert
 @DynamicUpdate
-public class Tag {
+public class Tag extends AbstractAuditingEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,7 +32,7 @@ public class Tag {
 
     @ManyToOne(optional = false)
     @JsonBackReference("user_tags")
-    private Person owner;
+    private User owner;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JsonBackReference("task_tags")

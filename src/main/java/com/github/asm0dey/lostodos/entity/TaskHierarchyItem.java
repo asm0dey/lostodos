@@ -18,10 +18,11 @@ import java.util.Set;
 @NoArgsConstructor
 @DynamicInsert
 @DynamicUpdate
-public abstract class TaskHierarchyItem {
+public abstract class TaskHierarchyItem extends AbstractAuditingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 
     @Column(nullable = false)
     private String name;
@@ -32,7 +33,7 @@ public abstract class TaskHierarchyItem {
 
     @ManyToOne(optional = false)
     @JsonBackReference("user_tasks")
-    private Person owner;
+    private User owner;
 
     @ManyToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
     @JsonManagedReference("task_tags")

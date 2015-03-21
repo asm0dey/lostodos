@@ -7,4 +7,10 @@ app.controller('LoginCtrl', function ($http, $mdDialog) {
                 $mdDialog.hide()
             })
     }
+    this.signIn = function(user){
+        $http.post('rest/user/login',JSON.stringify(user))
+            .success(function (data) {
+                $mdDialog.hide();
+            })
+    }
 });

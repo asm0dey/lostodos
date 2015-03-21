@@ -22,6 +22,6 @@
         </form>
     </md-content>
     <div class="md-actions">
-        <md-button class="md-raised md-primary" ng-click="login.createUser({username:login.username,email:login.email,password:login.password})" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
+        <md-button class="md-raised md-primary" ng-click="(loginType == 'signup')?login.createUser({username:login.username,email:login.email,password:login.password}):login.signIn({username:login.email,password:login.password})" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
     </div>
 </md-dialog>

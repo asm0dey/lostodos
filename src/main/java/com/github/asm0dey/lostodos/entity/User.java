@@ -1,6 +1,9 @@
 package com.github.asm0dey.lostodos.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -16,6 +19,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "T_USER")
+@Data
+@NoArgsConstructor
 public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
@@ -51,82 +56,17 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user")
     private Set<PersistentToken> persistentTokens = new HashSet<>();
 
-    public Long getId() {
-        return id;
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, mappedBy = "owner")
+    @JsonManagedReference("user_projects")
+    private Set<Project> projects;
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true, mappedBy = "owner")
+    private Set<Tag> tags;
+
+    @PrePersist
+    void initProjects() {
+        projects = new HashSet<>();
+        projects.add(Project.builder().name("Default").owner(this).build());
     }
 
-    public void setId(Long id) {
-        this.id = id;
     }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Authority> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<Authority> authorities) {
-        this.authorities = authorities;
-    }
-
-    public Set<PersistentToken> getPersistentTokens() {
-        return persistentTokens;
-    }
-
-    public void setPersistentTokens(Set<PersistentToken> persistentTokens) {
-        this.persistentTokens = persistentTokens;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        User user = (User) o;
-
-        if (!login.equals(user.login)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return login.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                "}";
-    }
-}

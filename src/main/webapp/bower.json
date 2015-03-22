@@ -20,6 +20,8 @@
   "dependencies": {
     "angular-material": "master",
     "angular-ui-router": "~0.2.13",
-    "angular-http-auth": "~1.2.2"
+    "angular-http-auth": "~1.2.2",
+    "ng-mfb": "master",
+    "ionicons": "~2.0.1"
   }
 }

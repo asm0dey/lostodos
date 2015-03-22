@@ -1,21 +1,33 @@
 <html lang="en" ng-app="LosTodos">
 <head>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="bower_components/ng-mfb/mfb/src/mfb.min.css">
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body layout="column" ng-controller="AppCtrl">
+
 <md-toolbar layout="row">
     <h1>Los TODOs</h1>
 </md-toolbar>
+<md-tabs md-selected="selectedIndex" flex>
+    <md-tab ng-repeat="tab in projects" label="{{tab.name}}"></md-tab>
+</md-tabs>
+
+
 <div layout="row" flex>
 
 </div>
+<mfb-menu  position="br" effect="zoomin" label="hover here" active-icon="ion-edit" resting-icon="ion-plus-round"  toggling-method="hover">
+    <mfb-button  icon="paper-airplane" label="text here" ng-click="createProject()"></mfb-button>
+</mfb-menu>
 <!-- Angular Material Dependencies -->
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.min.js"></script>
 <script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="bower_components/ng-mfb/src/mfb-directive.js"></script>
 <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
 
 <script src="scripts/app.js"></script>

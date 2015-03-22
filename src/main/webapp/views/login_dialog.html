@@ -8,23 +8,23 @@
                 </md-radio-group>
                 <md-input-container flex ng-if="loginType == 'signup'">
                     <label>Email</label>
-                    <input type="email" ng-model="login.email">
+                    <input type="email" ng-model="login.email" ng-required="loginType == 'signup'">
                 </md-input-container>
                 <md-input-container flex >
                     <label>Username</label>
-                    <input type="text" ng-model="login.username">
+                    <input type="text" ng-model="login.username" required aria-required="true">
                 </md-input-container>
                 <md-input-container flex>
                     <label>Password</label>
-                    <input type="password" ng-model="login.password">
+                    <input type="password" ng-model="login.password" required aria-required="true">
                 </md-input-container>
-                <md-checkbox ng-model="login.rememberMe" aria-label="Remember me">
+                <md-checkbox ng-model="login.rememberMe" aria-label="Remember me" ng-if="loginType == 'login'">
                     Remember me
                 </md-checkbox>
             </div>
         </form>
     </md-content>
     <div class="md-actions">
-        <md-button class="md-raised md-primary" ng-click="(loginType == 'signup')?createUser():signIn()" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
+        <md-button ng-disabled="loginForm.$invalid" class="md-raised md-primary" ng-click="(loginType == 'signup')?createUser():signIn()" ng-bind="loginType == 'signup'?'Sign Up':'Login'"></md-button>
     </div>
 </md-dialog>

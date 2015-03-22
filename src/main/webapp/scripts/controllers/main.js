@@ -9,5 +9,8 @@ app.controller('AppCtrl', function ($scope, $mdDialog, $http) {
         })
 
     });
-    $http.get('/rest/task');
+    $http.get('api/project')
+        .success(function (data) {
+            $scope.projects = data;
+        });
 });

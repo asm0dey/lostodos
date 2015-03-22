@@ -23,7 +23,6 @@ public abstract class TaskHierarchyItem extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(nullable = false)
     private String name;
 
@@ -31,12 +30,11 @@ public abstract class TaskHierarchyItem extends AbstractAuditingEntity {
     @JsonBackReference("task_children")
     private TodoGroup parent;
 
-    @ManyToOne(optional = false)
-    @JsonBackReference("user_tasks")
-    private User owner;
-
     @ManyToMany(mappedBy = "tasks", cascade = CascadeType.ALL)
     @JsonManagedReference("task_tags")
     private Set<Tag> tags;
+
+    @ManyToOne(optional = true)
+    private Project project;
 
 }
